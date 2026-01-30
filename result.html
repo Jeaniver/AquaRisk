@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Analysis Result</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="side-decor left">
+  <div class="circle-card">
+    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e">
+    <p>Water pollution increases health risks</p>
+  </div>
+</div>
+
+<div class="side-decor right">
+  <div class="circle-card">
+    <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9">
+    <p>Early detection supports sustainable water use</p>
+  </div>
+</div>
+
+  <div class="container">
+  <!-- LEFT: RESULT -->
+  <div class="panel main">
+    <h2>Water Quality Analysis Result</h2>
+    <div id="finalResult"></div>
+
+    <a href="input.html" class="back-btn">← Back to Input</a>
+  </div>
+
+  <!-- UNDER: RESOURCE -->
+<div class="water-logo">
+  <img src="https://cdn-icons-png.flaticon.com/512/4148/4148460.png">
+</div>
+    <p>
+      Poor water quality can cause health risks, ecosystem damage,
+      and clean water scarcity if not detected early.
+    </p>
+  </div>
+</div>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem("waterData"));
+    const resultDiv = document.getElementById("finalResult");
+
+    if (!data) {
+      resultDiv.innerHTML = "<p>No data available</p>";
+    } else {
+      let color = "#2ecc71"; // SAFE
+      if (data.riskLevel === "MODERATE RISK") color = "#f1c40f";
+      if (data.riskLevel === "HIGH RISK") color = "#e74c3c";
+
+      resultDiv.innerHTML = `
+      <p class="analysis-text">
+  This water quality status is generated using AI-based rule analysis
+  to support early risk detection.
+</p>
+        <div class="result-box" style="border-color:${color}">
+          <p><b>pH Level:</b> ${data.ph}</p>
+          <p><b>Turbidity:</b> ${data.turbidity} NTU</p>
+          <p><b>Temperature:</b> ${data.temp} °C</p>
+          <p><b>Risk Count:</b> ${data.riskCount}</p>
+          <h3 style="color:${color}">${data.riskLevel}</h3>
+        </div>
+      `;
+    }
+  </script>
+
+<div class="wave-container">
+</div>
+
+</body>
+</html>
